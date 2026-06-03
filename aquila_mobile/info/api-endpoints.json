@@ -1,0 +1,368 @@
+{
+  "baseUrl": "http://<HOST_IP>:3000",
+  "description": "Aquila System API endpoints for mobile integration",
+  "endpoints": [
+    {
+      "path": "/api/users/register",
+      "method": "POST",
+      "description": "Register a new user",
+      "body": {
+        "email": "string",
+        "password": "string",
+        "full_name": "string"
+      },
+      "responses": {
+        "201": "User created",
+        "400": "Invalid data or email already exists"
+      }
+    },
+    {
+      "path": "/api/users/login",
+      "method": "POST",
+      "description": "Login a user",
+      "body": {
+        "email": "string",
+        "password": "string"
+      },
+      "responses": {
+        "200": "Login successful",
+        "401": "Invalid email or password"
+      }
+    },
+    {
+      "path": "/api/users",
+      "method": "GET",
+      "description": "Get all users",
+      "responses": {
+        "200": "Array of user objects"
+      }
+    },
+    {
+      "path": "/api/users/:id",
+      "method": "GET",
+      "description": "Get user by ID",
+      "responses": {
+        "200": "User object",
+        "404": "User not found"
+      }
+    },
+    {
+      "path": "/api/users/:id",
+      "method": "PUT",
+      "description": "Update user profile",
+      "body": {
+        "email": "string",
+        "full_name": "string"
+      },
+      "responses": {
+        "200": "Updated user object",
+        "404": "User not found"
+      }
+    },
+    {
+      "path": "/api/users/:id/password",
+      "method": "PATCH",
+      "description": "Change user password",
+      "body": {
+        "newPassword": "string"
+      },
+      "responses": {
+        "200": "Password updated",
+        "400": "newPassword is required",
+        "404": "User not found"
+      }
+    },
+    {
+      "path": "/api/users/:id",
+      "method": "DELETE",
+      "description": "Delete user",
+      "responses": {
+        "200": "User deleted",
+        "404": "User not found"
+      }
+    },
+    {
+      "path": "/api/rooms",
+      "method": "GET",
+      "description": "Get all rooms",
+      "responses": {
+        "200": "Array of rooms"
+      }
+    },
+    {
+      "path": "/api/rooms",
+      "method": "POST",
+      "description": "Create a room",
+      "body": {
+        "userId": "string",
+        "name": "string",
+        "type": "string",
+        "description": "string"
+      },
+      "responses": {
+        "201": "Room created"
+      }
+    },
+    {
+      "path": "/api/rooms/:id",
+      "method": "GET",
+      "description": "Get room by ID",
+      "responses": {
+        "200": "Room object",
+        "404": "Room not found"
+      }
+    },
+    {
+      "path": "/api/rooms/:roomId/telemetry",
+      "method": "GET",
+      "description": "Get telemetry for a room",
+      "responses": {
+        "200": "Telemetry data list"
+      }
+    },
+    {
+      "path": "/api/rooms/:id",
+      "method": "PUT",
+      "description": "Update room",
+      "body": {
+        "name": "string",
+        "type": "string",
+        "description": "string"
+      },
+      "responses": {
+        "200": "Updated room object",
+        "404": "Room not found"
+      }
+    },
+    {
+      "path": "/api/rooms/:id",
+      "method": "DELETE",
+      "description": "Delete room and all related data (devices, measurements, snapshots, alerts)",
+      "responses": {
+        "200": "Room deleted",
+        "404": "Room not found"
+      }
+    },
+    {
+      "path": "/api/devices",
+      "method": "GET",
+      "description": "Get all devices",
+      "responses": {
+        "200": "Array of device objects"
+      }
+    },
+    {
+      "path": "/api/devices",
+      "method": "POST",
+      "description": "Register a new device",
+      "body": {
+        "roomId": "string",
+        "name": "string",
+        "macAddress": "string",
+        "type": "string"
+      },
+      "responses": {
+        "201": "Device created"
+      }
+    },
+    {
+      "path": "/api/devices/by-mac/:macAddress",
+      "method": "GET",
+      "description": "Get device by MAC address",
+      "responses": {
+        "200": "Device object",
+        "404": "Device not found"
+      }
+    },
+    {
+      "path": "/api/devices/:id",
+      "method": "GET",
+      "description": "Get device by ID",
+      "responses": {
+        "200": "Device object",
+        "404": "Device not found"
+      }
+    },
+    {
+      "path": "/api/devices/:deviceId/telemetry",
+      "method": "GET",
+      "description": "Get telemetry history for device",
+      "query": {
+        "limit": "integer",
+        "offset": "integer"
+      },
+      "responses": {
+        "200": "Array of measurements"
+      }
+    },
+    {
+      "path": "/api/devices/:deviceId/alerts",
+      "method": "GET",
+      "description": "Get alerts for device",
+      "responses": {
+        "200": "Array of alerts"
+      }
+    },
+    {
+      "path": "/api/devices/:id",
+      "method": "PUT",
+      "description": "Update device",
+      "body": {
+        "roomId": "string",
+        "name": "string",
+        "macAddress": "string",
+        "type": "string",
+        "is_active": "boolean"
+      },
+      "responses": {
+        "200": "Updated device object",
+        "404": "Device not found"
+      }
+    },
+    {
+      "path": "/api/devices/:id",
+      "method": "DELETE",
+      "description": "Delete device",
+      "responses": {
+        "200": "Device deleted",
+        "404": "Device not found"
+      }
+    },
+    {
+      "path": "/api/telemetry",
+      "method": "POST",
+      "description": "Send sensor telemetry data",
+      "body": {
+        "macAddress": "string",
+        "temperature": "number",
+        "humidity": "number",
+        "lightLevel": "number",
+        "soundLevel": "number"
+      },
+      "responses": {
+        "201": "Telemetry saved",
+        "400": "Validation failed",
+        "404": "Device not found"
+      }
+    },
+    {
+      "path": "/api/telemetry/:deviceId",
+      "method": "GET",
+      "description": "Get device telemetry history",
+      "query": {
+        "limit": "integer",
+        "offset": "integer"
+      },
+      "responses": {
+        "200": "Array of measurements"
+      }
+    },
+    {
+      "path": "/api/snapshots",
+      "method": "POST",
+      "description": "Create a snapshot record",
+      "body": {
+        "macAddress": "string",
+        "imageUrl": "string",
+        "reason": "string"
+      },
+      "responses": {
+        "201": "Snapshot created",
+        "404": "Device not found"
+      }
+    },
+    {
+      "path": "/api/snapshots/:deviceId",
+      "method": "GET",
+      "description": "Get snapshots by device ID",
+      "query": {
+        "limit": "integer"
+      },
+      "responses": {
+        "200": "Array of snapshots"
+      }
+    },
+    {
+      "path": "/api/snapshots/:id",
+      "method": "DELETE",
+      "description": "Delete snapshot",
+      "responses": {
+        "200": "Snapshot deleted",
+        "404": "Snapshot not found"
+      }
+    },
+    {
+      "path": "/api/alerts",
+      "method": "POST",
+      "description": "Create an alert manually",
+      "body": {
+        "deviceId": "string",
+        "type": "string",
+        "message": "string"
+      },
+      "responses": {
+        "201": "Alert created",
+        "400": "Validation failed"
+      }
+    },
+    {
+      "path": "/api/alerts",
+      "method": "GET",
+      "description": "Get all alerts",
+      "responses": {
+        "200": "Array of alerts"
+      }
+    },
+    {
+      "path": "/api/alerts/unread",
+      "method": "GET",
+      "description": "Get unread alerts",
+      "responses": {
+        "200": "Array of unread alerts"
+      }
+    },
+    {
+      "path": "/api/alerts/unread/count",
+      "method": "GET",
+      "description": "Get unread alert count",
+      "responses": {
+        "200": "Object with count"
+      }
+    },
+    {
+      "path": "/api/alerts/:deviceId",
+      "method": "GET",
+      "description": "Get alerts for a device",
+      "responses": {
+        "200": "Array of alerts"
+      }
+    },
+    {
+      "path": "/api/alerts/:id/read",
+      "method": "PUT",
+      "description": "Mark alert as read",
+      "responses": {
+        "200": "Alert marked as read",
+        "404": "Alert not found"
+      }
+    },
+    {
+      "path": "/api/alerts/:id/unread",
+      "method": "PUT",
+      "description": "Mark alert as unread",
+      "responses": {
+        "200": "Alert marked as unread",
+        "404": "Alert not found"
+      }
+    },
+    {
+      "path": "/api/alerts/:id",
+      "method": "DELETE",
+      "description": "Delete an alert",
+      "responses": {
+        "200": "Alert deleted",
+        "404": "Alert not found"
+      }
+    }
+  ]
+}

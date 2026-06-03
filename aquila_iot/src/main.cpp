@@ -152,8 +152,9 @@ bool ensureDeviceRegistered(const String &mac) {
 
 void sendSnapshot(const String &mac, const char* reason) {
   String url = SERVER_URL + "/api/snapshots";
-  int imageId = nextSnapshotImageId++ % 1000;
-  String imageUrl = "https://picsum.photos/640/480?random=" + String(imageId);
+  unsigned long timestamp = millis();
+  String seed = String(timestamp) + "-" + String(nextSnapshotImageId++);
+  String imageUrl = "https://picsum.photos/seed/" + seed + "/640/480";
 
   String payload = "{";
   payload += "\"macAddress\":\"" + mac + "\",";

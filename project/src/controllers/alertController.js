@@ -11,8 +11,8 @@ exports.create = async (req, res) => {
 };
 
 exports.getAll = async (req, res) => {
-  const { limit = 100 } = req.query;
-  const result = await Alert.getAll(limit);
+  const { limit = 100, userId } = req.query;
+  const result = await Alert.getAll(limit, userId);
   
   if (!result.success) {
     return res.status(500).json({ error: result.error });
@@ -43,6 +43,17 @@ exports.getByDeviceId = async (req, res) => {
   const { limit = 50 } = req.query;
   const result = await Alert.getByDeviceId(deviceId, limit);
   
+  if (!result.success) {
+    return res.status(500).json({ error: result.error });
+  }
+  res.json(result.data);
+};
+
+exports.getByUserId = async (req, res) => {
+  const { userId } = req.params;
+  const { limit = 100 } = req.query;
+  const result = await Alert.getByUserId(userId, limit);
+
   if (!result.success) {
     return res.status(500).json({ error: result.error });
   }

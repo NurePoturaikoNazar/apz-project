@@ -31,6 +31,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 // Dev Bypass
                 sessionManager.saveAuthToken("dev_token")
                 sessionManager.saveUserRole("admin")
+                sessionManager.saveUserId("admin")
                 findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
                 return@setOnClickListener
             }
@@ -55,6 +56,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     val sessionManager = SessionManager(requireContext())
                     sessionManager.saveAuthToken(loginResponse.token)
                     sessionManager.saveUserRole(loginResponse.user.role ?: "user")
+                    sessionManager.saveUserId(loginResponse.user.id)
                     findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
                 } else {
                     Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show()

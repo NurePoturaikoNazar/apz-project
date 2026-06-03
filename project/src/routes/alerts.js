@@ -6,6 +6,7 @@ router.post('/', alertController.create);
 router.get('/', alertController.getAll);
 router.get('/unread/count', alertController.getUnreadCount);
 router.get('/unread', alertController.getUnread);
+router.get('/user/:userId', alertController.getByUserId);
 router.get('/:deviceId', alertController.getByDeviceId);
 router.put('/:id/read', alertController.markAsRead);
 router.put('/:id/unread', alertController.markAsUnread);

@@ -1,5 +1,6 @@
 const Device = require('../models/Device');
 const Snapshot = require('../models/Snapshot');
+const Alert = require('../models/Alert');
 
 exports.create = async (req, res) => {
   const { macAddress, imageUrl, reason } = req.body;
@@ -15,6 +16,14 @@ exports.create = async (req, res) => {
     if (!result.success) {
       return res.status(400).json({ error: result.error });
     }
+
+    if (reason === 'motion_detected') {
+      const alertExists = await Alert.checkRecentAlert(deviceId, 'MOTION_DETECTED', 15);
+      if (!alertExists) {
+        await Alert.create(deviceId, 'MOTION_DETECTED', '⚠️ Рух виявлено на пристрої');
+      }
+    }
+
     res.status(201).json(result.data);
   } catch (err) {
     res.status(500).json({ error: err.message });

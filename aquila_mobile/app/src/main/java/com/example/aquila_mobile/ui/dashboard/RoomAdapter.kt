@@ -21,13 +21,35 @@ class RoomAdapter(
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
         val room = rooms[position]
         holder.binding.roomName.text = room.name
-        holder.binding.roomType.text = room.type
-        
-        // Example metric display
-        val temp = room.averageMetrics?.get("temperature") ?: "--"
-        holder.binding.tempMetric.text = "${temp}°C"
+        holder.binding.roomType.text = room.type.replace("_", " ")
 
-        holder.root.setOnClickListener { onRoomClick(room) }
+        val temp = room.averageMetrics?.get("temperature")
+        val latestLastSeen = room.devices
+            ?.mapNotNull { it.lastSeen }
+            ?.maxOrNull()
+
+        if (temp == null) {
+            holder.binding.tempMetric.setTextColor(0x4DFFFFFF) // Dimmed text
+            holder.binding.lastUpdatedText.text = latestLastSeen?.let { "Updated: ${formatLastSeen(it)}" } ?: "No updates yet"
+        } else {
+            holder.binding.tempMetric.text = "${temp.toInt()}°C"
+            holder.binding.tempMetric.setTextColor(0xFF00D1FF.toInt()) // Electric Blue
+            holder.binding.lastUpdatedText.text = latestLastSeen?.let { "Updated: ${formatLastSeen(it)}" } ?: "Live"
+        }
+
+        holder.binding.root.setOnClickListener { onRoomClick(room) }
+    }
+
+    private fun formatLastSeen(lastSeen: String): String {
+        return try {
+            val cleaned = lastSeen.replace('T', ' ').replace("Z", "")
+            val timePart = cleaned.split(' ').getOrNull(1)
+            if (timePart != null && timePart.length >= 5) {
+                timePart.substring(0, 5)
+            } else cleaned.takeIf { it.isNotEmpty() } ?: ""
+        } catch (e: Exception) {
+            lastSeen
+        }
     }
 
     override fun getItemCount() = rooms.size

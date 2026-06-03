@@ -50,7 +50,9 @@ interface AquilaApiService {
 
     // --- Alerts & Snapshots ---
     @GET("/api/alerts")
-    suspend fun getAlerts(): List<Alert>
+    suspend fun getAlerts(
+        @Query("userId") userId: String? = null
+    ): List<Alert>
 
     @GET("/api/alerts/unread")
     suspend fun getUnreadAlerts(): List<Alert>

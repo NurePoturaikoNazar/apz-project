@@ -26,12 +26,28 @@ class SessionManager(context: Context) {
         return prefs.getString("auth_token", null)
     }
 
+    fun saveUserId(userId: String) {
+        prefs.edit().putString("user_id", userId).apply()
+    }
+
+    fun getUserId(): String? {
+        return prefs.getString("user_id", null)
+    }
+
     fun saveUserRole(role: String) {
         prefs.edit().putString("user_role", role).apply()
     }
 
     fun getUserRole(): String? {
         return prefs.getString("user_role", "user")
+    }
+
+    fun saveNotificationsEnabled(enabled: Boolean) {
+        prefs.edit().putBoolean("notifications_enabled", enabled).apply()
+    }
+
+    fun isNotificationsEnabled(): Boolean {
+        return prefs.getBoolean("notifications_enabled", true)
     }
 
     fun clearSession() {

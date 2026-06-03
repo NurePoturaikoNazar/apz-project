@@ -8,8 +8,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object RetrofitClient {
-    // You should change this to your actual server IP or use a setting as requested
-    private var BASE_URL = "http://10.0.2.2:3000" // Default for Android Emulator
+    // Most reliable local backend address for this setup.
+    private var BASE_URL = "http://192.168.42.212:3000"
 
     fun setBaseUrl(url: String) {
         BASE_URL = url

@@ -2,4 +2,20 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Cyber Minimalism Palette -->
+    <color name="background_deep">#121212</color>
+    <color name="background_surface">#1E1E1E</color>
+    <color name="electric_blue">#00D1FF</color>
+    <color name="cyber_orange">#FF8A00</color>
+    <color name="toxic_green">#00FF41</color>
+    <color name="neon_red">#FF3131</color>
+
+    <!-- Glassmorphism effects -->
+    <color name="glass_overlay">#1AFFFFFF</color>
+    <color name="glass_border">#33FFFFFF</color>
+
+    <!-- Text -->
+    <color name="text_primary">#F5F5F5</color>
+    <color name="text_secondary">#B0B0B0</color>
 </resources>

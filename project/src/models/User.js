@@ -33,7 +33,18 @@ class User {
         return { success: false, error: 'Invalid email or password' };
       }
       
-      return { success: true, data: { id: user.id, email: user.email, full_name: user.full_name } };
+      return {
+        success: true,
+        data: {
+          token: uuidv4(),
+          user: {
+            id: user.id,
+            email: user.email,
+            full_name: user.full_name,
+            role: 'user'
+          }
+        }
+      };
     } catch (err) {
       return { success: false, error: err.message };
     }

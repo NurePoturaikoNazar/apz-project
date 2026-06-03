@@ -18,7 +18,20 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentSettingsBinding.bind(view)
 
+        val sessionManager = SessionManager(requireContext())
+        val isAdmin = sessionManager.getUserRole() == "admin"
+
+        binding.networkConfigCard.visibility = if (isAdmin) View.VISIBLE else View.GONE
+        binding.toolbar.title = if (isAdmin) "System Settings" else "Settings"
+
+        binding.notificationsSwitch.isChecked = sessionManager.isNotificationsEnabled()
+        binding.notificationsSwitch.setOnCheckedChangeListener { _, isChecked ->
+            sessionManager.saveNotificationsEnabled(isChecked)
+            Toast.makeText(context, if (isChecked) "Notifications enabled" else "Notifications disabled", Toast.LENGTH_SHORT).show()
+        }
+
         binding.saveButton.setOnClickListener {
+            if (!isAdmin) return@setOnClickListener
             val newUrl = binding.serverUrlInput.text.toString()
             if (newUrl.startsWith("http")) {
                 RetrofitClient.setBaseUrl(newUrl)
@@ -29,7 +42,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         }
 
         binding.logoutButton.setOnClickListener {
-            SessionManager(requireContext()).clearSession()
+            sessionManager.clearSession()
             findNavController().navigate(R.id.loginFragment)
         }
     }

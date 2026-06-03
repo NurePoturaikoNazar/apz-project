@@ -32,8 +32,21 @@ class Alert {
   }
 
   // Отримати всі
-  static async getAll(limit = 100) {
+  static async getAll(limit = 100, userId = null) {
     try {
+      if (userId) {
+        const result = await pool.query(
+          `SELECT a.* FROM alerts a
+           JOIN devices d ON a.device_id = d.id
+           JOIN rooms r ON d.room_id = r.id
+           WHERE r.user_id = $1
+           ORDER BY a.created_at DESC
+           LIMIT $2`,
+          [userId, limit]
+        );
+        return { success: true, data: result.rows };
+      }
+
       const result = await pool.query('SELECT * FROM alerts ORDER BY created_at DESC LIMIT $1', [limit]);
       return { success: true, data: result.rows };
     } catch (err) {
@@ -57,6 +70,23 @@ class Alert {
       const result = await pool.query(
         'SELECT * FROM alerts WHERE device_id = $1 ORDER BY created_at DESC LIMIT $2',
         [deviceId, limit]
+      );
+      return { success: true, data: result.rows };
+    } catch (err) {
+      return { success: false, error: err.message };
+    }
+  }
+
+  static async getByUserId(userId, limit = 100) {
+    try {
+      const result = await pool.query(
+        `SELECT a.* FROM alerts a
+         JOIN devices d ON a.device_id = d.id
+         JOIN rooms r ON d.room_id = r.id
+         WHERE r.user_id = $1
+         ORDER BY a.created_at DESC
+         LIMIT $2`,
+        [userId, limit]
       );
       return { success: true, data: result.rows };
     } catch (err) {

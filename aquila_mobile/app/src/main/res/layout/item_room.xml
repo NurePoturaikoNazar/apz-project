@@ -10,31 +10,51 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/roomName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.05" />
 
         <TextView
             android:id="@+id/roomType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_secondary"
-            android:textSize="14sp" />
+            android:textColor="@color/electric_blue"
+            android:textSize="12sp"
+            android:textAllCaps="true"
+            android:layout_marginTop="4dp" />
+
+        <View
+            android:layout_width="40dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/electric_blue" />
 
         <TextView
             android:id="@+id/tempMetric"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:textColor="@color/electric_blue"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textColor="@color/text_primary"
+            android:textSize="24sp"
+            android:fontFamily="sans-serif-condensed-medium" />
+
+        <TextView
+            android:id="@+id/lastUpdatedText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium"
+            android:ellipsize="end"
+            android:maxLines="1" />
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

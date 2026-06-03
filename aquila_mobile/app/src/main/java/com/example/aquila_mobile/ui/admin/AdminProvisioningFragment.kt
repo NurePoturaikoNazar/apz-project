@@ -1,6 +1,7 @@
 package com.example.aquila_mobile.ui.admin
 
 import android.os.Bundle
+import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -28,19 +29,17 @@ class AdminProvisioningFragment : Fragment(R.layout.fragment_admin_provisioning)
     }
 
     private fun performDeployment() {
-        val userName = binding.userFullNameInput.text.toString()
-        val userEmail = binding.userEmailInput.text.toString()
-        val userPass = binding.userPasswordInput.text.toString()
+        val userName = binding.userFullNameInput.text.toString().trim()
+        val userEmail = binding.userEmailInput.text.toString().trim()
+        val userPass = binding.userPasswordInput.text.toString().trim()
 
-        val roomName = binding.roomNameInput.text.toString()
-        val roomType = binding.roomTypeInput.text.toString()
+        val roomName = binding.roomNameInput.text.toString().trim()
+        val roomType = binding.roomTypeInput.text.toString().trim()
 
-        val deviceName = binding.deviceNameInput.text.toString()
-        val macAddr = binding.macAddressInput.text.toString()
+        val deviceName = binding.deviceNameInput.text.toString().trim()
+        val macAddr = binding.macAddressInput.text.toString().trim()
 
-        if (userName.isEmpty() || userEmail.isEmpty() || userPass.isEmpty() ||
-            roomName.isEmpty() || deviceName.isEmpty() || macAddr.isEmpty()) {
-            Toast.makeText(context, "All fields are mandatory for deployment", Toast.LENGTH_SHORT).show()
+        if (!validateInputs(userName, userEmail, userPass, roomName, roomType, deviceName, macAddr)) {
             return
         }
 
@@ -51,7 +50,7 @@ class AdminProvisioningFragment : Fragment(R.layout.fragment_admin_provisioning)
             try {
                 // 1. Create User
                 val userResponse = RetrofitClient.apiService.register(mapOf(
-                    "fullName" to userName,
+                    "full_name" to userName,
                     "email" to userEmail,
                     "password" to userPass
                 ))
@@ -70,11 +69,9 @@ class AdminProvisioningFragment : Fragment(R.layout.fragment_admin_provisioning)
                 ))
 
                 if (!roomResponse.isSuccessful) {
-                    throw Exception("Room creation failed")
+                    throw Exception("Room creation failed: ${roomResponse.errorBody()?.string() ?: roomResponse.message()}")
                 }
-                
-                // For simplicity, we fetch rooms to get the newly created room's ID 
-                // In a real API, the createRoom should return the object
+
                 val rooms = RetrofitClient.apiService.getRooms()
                 val targetRoom = rooms.find { it.name == roomName } ?: throw Exception("Room not found after creation")
 
@@ -90,16 +87,78 @@ class AdminProvisioningFragment : Fragment(R.layout.fragment_admin_provisioning)
                     Toast.makeText(context, "System Deployed Successfully!", Toast.LENGTH_LONG).show()
                     findNavController().navigateUp()
                 } else {
-                    throw Exception("Device registration failed")
+                    throw Exception("Device registration failed: ${deviceResponse.errorBody()?.string() ?: deviceResponse.message()}")
                 }
 
             } catch (e: Exception) {
-                Toast.makeText(context, "Deployment Error: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Deployment failed. Please check the form and try again.", Toast.LENGTH_LONG).show()
             } finally {
                 binding.deploySystemButton.isEnabled = true
                 binding.loadingBar.visibility = View.GONE
             }
         }
+    }
+
+    private fun validateInputs(
+        userName: String,
+        userEmail: String,
+        userPass: String,
+        roomName: String,
+        roomType: String,
+        deviceName: String,
+        macAddr: String
+    ): Boolean {
+        binding.userFullNameLayout.error = null
+        binding.userEmailLayout.error = null
+        binding.userPasswordLayout.error = null
+        binding.roomNameLayout.error = null
+        binding.roomTypeLayout.error = null
+        binding.deviceNameLayout.error = null
+        binding.macAddressLayout.error = null
+
+        var isValid = true
+
+        if (userName.length < 3) {
+            binding.userFullNameLayout.error = "Enter the user full name."
+            isValid = false
+        }
+
+        if (userEmail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
+            binding.userEmailLayout.error = "Enter a valid email like user@example.com."
+            isValid = false
+        }
+
+        if (userPass.length < 8) {
+            binding.userPasswordLayout.error = "Use at least 8 characters for the password."
+            isValid = false
+        }
+
+        if (roomName.length < 3) {
+            binding.roomNameLayout.error = "Enter the room name, for example Living Room."
+            isValid = false
+        }
+
+        if (roomType.isEmpty()) {
+            binding.roomTypeLayout.error = "Enter the type of room, for example Office or Bedroom."
+            isValid = false
+        }
+
+        if (deviceName.isEmpty()) {
+            binding.deviceNameLayout.error = "Enter a device name so it is easy to recognize."
+            isValid = false
+        }
+
+        val macRegex = Regex("^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$")
+        if (!macRegex.matches(macAddr)) {
+            binding.macAddressLayout.error = "Use MAC format XX:XX:XX:XX:XX:XX."
+            isValid = false
+        }
+
+        if (!isValid) {
+            Toast.makeText(context, "Please fix the highlighted fields and try again.", Toast.LENGTH_SHORT).show()
+        }
+
+        return isValid
     }
 
     override fun onDestroyView() {
