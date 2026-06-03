@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const http = require('http');
+const os = require('os');
 const { URL } = require('url');
 
 function parseArgs() {
@@ -16,8 +17,21 @@ function parseArgs() {
   return out;
 }
 
+function getLocalIp() {
+  const ifaces = os.networkInterfaces();
+  for (const name of Object.keys(ifaces)) {
+    for (const iface of ifaces[name]) {
+      if (iface.family === 'IPv4' && !iface.internal) {
+        return iface.address;
+      }
+    }
+  }
+  return '127.0.0.1';
+}
+
 const argv = parseArgs();
-const SERVER = argv.server || 'http://localhost:3000';
+const defaultServer = process.env.AQUILA_SERVER || process.env.SERVER || `http://${getLocalIp()}:3000`;
+const SERVER = argv.server || defaultServer;
 const MAC = argv.mac || 'AA:BB:CC:DD:EE:01';
 const NAME = argv.name || 'ESP32 Wokwi';
 const TYPE = argv.type || 'multi_sensor';

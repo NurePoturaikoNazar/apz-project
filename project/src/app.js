@@ -20,6 +20,13 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// ШТУЧНЕ НАВАНТАЖЕННЯ 
+app.use((req, res, next) => {
+  const start = Date.now();
+  while (Date.now() - start < 5) { }
+  next();
+});
+
 // --- SCALAR API DOCUMENTATION ---
 app.use('/api/reference', apiReference({
   theme: 'kepler',

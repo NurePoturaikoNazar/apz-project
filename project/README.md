@@ -39,4 +39,71 @@ npm start
 - Якщо будуть помилки при застосуванні схеми, скопіюй помилку сюди — допоможу розібратися.
 
 ---
-Файли, додані/оновлені: `project/.env` (оновлено), `project/scripts/init_db.js` (додається), `project/README.md` (цей файл).
+
+## Docker Compose та навантажувальне тестування
+
+Для швидкого запуску з горизонтальним масштабуванням додано:
+- `Dockerfile`
+- `docker-compose.yml`
+- `nginx.conf`
+- `locustfile.py`
+- `requirements-locust.txt`
+
+### Запуск Docker Compose
+
+У папці `project` виконай:
+```powershell
+cd "c:\Users\kutst\OneDrive\Desktop\uni_ 6_semestr\APZ\apz-project\project"
+docker compose up --scale backend=1 -d
+```
+
+Це підніме:
+- PostgreSQL на `localhost:5432`
+- один контейнер backend
+- Nginx на `http://localhost`
+
+### Масштабування
+
+Щоб порівняти 1 та 3 копії бекенду:
+```powershell
+docker compose up --scale backend=3 -d
+```
+
+### Тестування Locust
+
+Створи та активуй віртуальне середовище (один раз):
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+Встанови Locust у це середовище:
+```powershell
+python -m pip install --upgrade pip
+python -m pip install -r requirements-locust.txt
+```
+
+Запусти тест:
+```powershell
+python -m locust -f locustfile.py --host http://localhost
+```
+
+Потім відкрий у браузері:
+- `http://localhost:8089`
+
+Запусти 50 користувачів і розпочни тест.
+
+### Що дивитися у Locust
+
+- `Requests/s` (RPS)
+- `Average response time`
+- `Failures`
+
+Порівняй значення для:
+- `backend=1`
+- `backend=3`
+
+Якщо при 3 копіях RPS вищий і помилок менше — це підтверджує користь горизонтального масштабування.
+
+---
+Файли, додані/оновлені: `project/.env` (оновлено), `project/scripts/init_db.js` (додається), `project/README.md` (цей файл), `project/Dockerfile`, `project/docker-compose.yml`, `project/nginx.conf`, `project/locustfile.py`, `project/requirements-locust.txt`.

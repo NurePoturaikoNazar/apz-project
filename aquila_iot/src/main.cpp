@@ -14,12 +14,14 @@ const char* WIFI_SSID = "Wokwi-GUEST"; // Wokwi default guest network
 const char* WIFI_PASS = "";
 
 // Most reliable local backend address for this setup.
-const char* DEFAULT_SERVER_URL = "http://192.168.42.212:3000";
+// Set this to the IP address of the Windows host running the backend.
+const char* DEFAULT_SERVER_URL = "http://192.168.42.204:3000";
 
 // Possible URLs to reach a local backend from Wokwi / VS Code simulation.
 // Try the Windows host LAN IP first, then local container/host aliases.
 const char* SERVER_CANDIDATES[] = {
   DEFAULT_SERVER_URL,
+  "http://192.168.42.204:3000",
   "http://localhost:3000",
   "http://host.docker.internal:3000",
   "http://10.0.2.2:3000",

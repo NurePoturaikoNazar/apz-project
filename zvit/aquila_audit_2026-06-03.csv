@@ -1,0 +1,37 @@
+ID,Type,Message,DeviceID,Date,Status
+36,HUMIDITY_HIGH,⚠️ Вологість занадто висока: 73% (макс: 70%),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 04, 2026, 01:43:35 AM",Unread
+35,MOTION_DETECTED,⚠️ Рух виявлено на пристрої,cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 04, 2026, 01:43:27 AM",Unread
+34,SOUND,⚠️ Рівень шуму критичний: 150dB (макс: 80dB),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 09:17:35 PM",Unread
+33,TEMPERATURE_HIGH,⚠️ Температура занадто висока: 34.1°C (макс: 28°C),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 09:17:35 PM",Unread
+32,SOUND,⚠️ Рівень шуму критичний: 150dB (макс: 80dB),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 09:02:35 PM",Read
+31,TEMPERATURE_HIGH,⚠️ Температура занадто висока: 80°C (макс: 28°C),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 09:02:35 PM",Unread
+30,SOUND,⚠️ Рівень шуму критичний: 150dB (макс: 80dB),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 08:47:26 PM",Unread
+29,TEMPERATURE_HIGH,⚠️ Температура занадто висока: 80°C (макс: 28°C),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 08:47:26 PM",Unread
+28,MOTION_DETECTED,⚠️ Рух виявлено на пристрої,cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 08:32:29 PM",Read
+27,SOUND,⚠️ Рівень шуму критичний: 150dB (макс: 80dB),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 08:32:18 PM",Unread
+26,TEMPERATURE_HIGH,⚠️ Температура занадто висока: 80°C (макс: 28°C),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 08:32:18 PM",Unread
+25,SOUND,⚠️ Рівень шуму критичний: 150dB (макс: 80dB),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 08:17:10 PM",Unread
+24,TEMPERATURE_HIGH,⚠️ Температура занадто висока: 80°C (макс: 28°C),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 08:17:10 PM",Unread
+23,MOTION_DETECTED,⚠️ Рух виявлено на пристрої,cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 08:02:01 PM",Unread
+22,SOUND,⚠️ Рівень шуму критичний: 150dB (макс: 80dB),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 08:01:56 PM",Unread
+21,TEMPERATURE_HIGH,⚠️ Температура занадто висока: 80°C (макс: 28°C),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 08:01:56 PM",Unread
+20,MOTION_DETECTED,⚠️ Рух виявлено на пристрої,cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 07:11:40 PM",Read
+19,TEMPERATURE_HIGH,⚠️ Температура занадто висока: 80°C (макс: 28°C),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 07:02:32 PM",Unread
+18,SOUND,⚠️ Рівень шуму критичний: 150dB (макс: 80dB),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 06:59:46 PM",Unread
+17,MOTION_DETECTED,⚠️ Рух виявлено на пристрої,cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 06:55:58 PM",Unread
+16,TEMPERATURE_HIGH,⚠️ Температура занадто висока: 80°C (макс: 28°C),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 06:47:20 PM",Unread
+15,SOUND,⚠️ Рівень шуму критичний: 150dB (макс: 80dB),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 06:44:33 PM",Unread
+14,SOUND,⚠️ Рівень шуму критичний: 150dB (макс: 80dB),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 06:19:22 PM",Unread
+13,TEMPERATURE_HIGH,⚠️ Температура занадто висока: 73.4°C (макс: 28°C),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 05:06:49 PM",Unread
+12,SOUND,⚠️ Рівень шуму критичний: 150dB (макс: 80dB),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 05:02:17 PM",Unread
+11,HUMIDITY_LOW,⚠️ Вологість занадто низька: 0% (мін: 30%),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 05:02:17 PM",Unread
+10,TEMPERATURE_LOW,⚠️ Температура занадто низька: -40°C (мін: 16°C),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 05:02:17 PM",Unread
+9,SOUND,⚠️ Рівень шуму критичний: 150dB (макс: 80dB),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 04:42:15 PM",Unread
+8,HUMIDITY_HIGH,⚠️ Вологість занадто висока: 100% (макс: 70%),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 04:42:15 PM",Unread
+7,TEMPERATURE_HIGH,⚠️ Температура занадто висока: 79.8°C (макс: 28°C),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 04:42:15 PM",Unread
+6,SOUND,⚠️ Рівень шуму критичний: 150dB (макс: 80dB),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 04:19:09 PM",Unread
+5,HUMIDITY_HIGH,⚠️ Вологість занадто висока: 100% (макс: 70%),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 04:19:09 PM",Unread
+4,TEMPERATURE_HIGH,⚠️ Температура занадто висока: 79.8°C (макс: 28°C),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 04:19:09 PM",Unread
+3,SOUND,⚠️ Рівень шуму критичний: 150dB (макс: 80dB),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 02:41:36 PM",Unread
+2,HUMIDITY_HIGH,⚠️ Вологість занадто висока: 100% (макс: 70%),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 02:41:36 PM",Unread
+1,TEMPERATURE_HIGH,⚠️ Температура занадто висока: 79.8°C (макс: 28°C),cbeaeed2-77c2-4d34-92b5-ff5f63409a92,"Jun 03, 2026, 02:41:21 PM",Unread
