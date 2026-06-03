@@ -1,0 +1,177 @@
+{
+  "app": {
+    "name": "Aquila",
+    "tagline": "Система моніторингу IoT"
+  },
+  "nav": {
+    "dashboard": "Дашборд",
+    "rooms": "Кімнати",
+    "analytics": "Аналітика",
+    "events": "Центр подій",
+    "users": "Користувачі",
+    "system": "Система",
+    "audit": "Аудит",
+    "admin": "Адміністрування",
+    "logout": "Вийти",
+    "profile": "Профіль"
+  },
+  "auth": {
+    "login": "Увійти",
+    "loginTitle": "Вхід в систему",
+    "loginSubtitle": "Введіть свої облікові дані для доступу",
+    "email": "Електронна пошта",
+    "password": "Пароль",
+    "emailPlaceholder": "your{'@'}email.com",
+    "passwordPlaceholder": "Введіть пароль",
+    "loggingIn": "Вхід...",
+    "invalidCredentials": "Невірний email або пароль",
+    "sessionExpired": "Термін дії сесії закінчився"
+  },
+  "dashboard": {
+    "title": "Дашборд",
+    "subtitle": "Огляд усіх приміщень у реальному часі",
+    "totalRooms": "Кімнати",
+    "totalDevices": "Пристрої",
+    "activeAlerts": "Тривоги",
+    "onlineDevices": "Онлайн",
+    "noRooms": "Кімнати ще не створені",
+    "noRoomsHint": "Створіть першу кімнату в розділі «Система»"
+  },
+  "rooms": {
+    "title": "Кімнати",
+    "subtitle": "Керування та моніторинг приміщень",
+    "addRoom": "Додати кімнату",
+    "editRoom": "Редагувати кімнату",
+    "deleteRoom": "Видалити кімнату",
+    "deleteConfirm": "Ви впевнені? Усі пристрої та дані кімнати будуть видалені.",
+    "name": "Назва",
+    "type": "Тип",
+    "description": "Опис",
+    "devices": "Пристрої",
+    "noDevices": "Немає підключених пристроїв",
+    "viewDetails": "Детальніше",
+    "types": {
+      "living_room": "Вітальня",
+      "bedroom": "Спальня",
+      "kitchen": "Кухня",
+      "bathroom": "Ванна кімната",
+      "office": "Кабінет",
+      "garage": "Гараж",
+      "other": "Інше"
+    }
+  },
+  "devices": {
+    "title": "Пристрої",
+    "addDevice": "Додати пристрій",
+    "editDevice": "Редагувати пристрій",
+    "deleteDevice": "Видалити пристрій",
+    "name": "Назва",
+    "macAddress": "MAC-адреса",
+    "type": "Тип",
+    "status": "Статус",
+    "online": "Онлайн",
+    "offline": "Офлайн",
+    "room": "Кімната",
+    "notFound": "Пристрій не знайдено"
+  },
+  "telemetry": {
+    "temperature": "Температура",
+    "humidity": "Вологість",
+    "light": "Освітлення",
+    "sound": "Звук",
+    "units": {
+      "celsius": "°C",
+      "percent": "%",
+      "lux": "lx",
+      "decibel": "дБ"
+    },
+    "period": {
+      "hour": "Година",
+      "day": "День",
+      "week": "Тиждень"
+    },
+    "noData": "Немає даних телеметрії"
+  },
+  "alerts": {
+    "title": "Тривоги",
+    "all": "Усі тривоги",
+    "unread": "Непрочитані",
+    "markRead": "Позначити прочитаним",
+    "markUnread": "Позначити непрочитаним",
+    "delete": "Видалити",
+    "noAlerts": "Тривог немає",
+    "types": {
+      "TEMPERATURE_HIGH": "Висока температура",
+      "TEMPERATURE_LOW": "Низька температура",
+      "HUMIDITY_HIGH": "Висока вологість",
+      "HUMIDITY_LOW": "Низька вологість",
+      "SOUND_HIGH": "Високий рівень шуму",
+      "MOTION_DETECTED": "Виявлено рух",
+      "MANUAL": "Ручна тривога"
+    }
+  },
+  "snapshots": {
+    "title": "Знімки",
+    "gallery": "Галерея знімків",
+    "noSnapshots": "Знімків немає",
+    "reason": "Причина",
+    "timestamp": "Час",
+    "delete": "Видалити"
+  },
+  "events": {
+    "title": "Центр подій",
+    "subtitle": "Сповіщення та знімки з камер",
+    "tabAlerts": "Тривоги",
+    "tabSnapshots": "Знімки"
+  },
+  "users": {
+    "title": "Управління користувачами",
+    "subtitle": "Створення та керування акаунтами",
+    "addUser": "Створити користувача",
+    "editUser": "Редагувати",
+    "deleteUser": "Видалити",
+    "deleteConfirm": "Ви впевнені, що хочете видалити цього користувача?",
+    "fullName": "Повне ім'я",
+    "email": "Email",
+    "password": "Пароль",
+    "changePassword": "Змінити пароль",
+    "newPassword": "Новий пароль",
+    "createdAt": "Створено",
+    "actions": "Дії",
+    "noUsers": "Користувачів не знайдено"
+  },
+  "system": {
+    "title": "Конфігурація системи",
+    "subtitle": "Кімнати та прив'язка пристроїв",
+    "roomManagement": "Управління кімнатами",
+    "deviceManagement": "Управління пристроями"
+  },
+  "audit": {
+    "title": "Аудит та звіти",
+    "subtitle": "Журнал тривог та експорт даних",
+    "exportCsv": "Експорт CSV",
+    "exportPdf": "Експорт PDF",
+    "filter": "Фільтр",
+    "filterByType": "За типом",
+    "filterByDevice": "За пристроєм",
+    "allTypes": "Усі типи",
+    "allDevices": "Усі пристрої"
+  },
+  "common": {
+    "save": "Зберегти",
+    "cancel": "Скасувати",
+    "create": "Створити",
+    "edit": "Редагувати",
+    "delete": "Видалити",
+    "confirm": "Підтвердити",
+    "loading": "Завантаження...",
+    "error": "Помилка",
+    "success": "Успішно",
+    "noData": "Дані відсутні",
+    "search": "Пошук...",
+    "close": "Закрити",
+    "actions": "Дії",
+    "back": "Назад",
+    "language": "Мова"
+  }
+}

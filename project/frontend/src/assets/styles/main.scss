@@ -1,0 +1,257 @@
+@use 'variables' as *;
+@use 'animations';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── Reset & Base ── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: $font-family;
+  background: $bg-primary;
+  color: $text-primary;
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+/* ── Typography ── */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.3;
+  color: $text-primary;
+}
+
+h1 { font-size: $font-4xl; }
+h2 { font-size: $font-3xl; }
+h3 { font-size: $font-2xl; }
+h4 { font-size: $font-xl; }
+
+a {
+  color: $accent-blue;
+  text-decoration: none;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $accent-cyan;
+  }
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-primary;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: $radius-full;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(0, 212, 255, 0.25);
+  color: #fff;
+}
+
+/* ── Glass Panels ── */
+.glass-panel {
+  background: $bg-card;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid $bg-glass-border;
+  border-radius: $radius-lg;
+}
+
+.glass-panel-hover {
+  @extend .glass-panel;
+  transition: all $transition-base;
+
+  &:hover {
+    background: $bg-card-hover;
+    border-color: $border-active;
+    box-shadow: $shadow-glow-blue;
+    transform: translateY(-2px);
+  }
+}
+
+/* ── Neon Glow ── */
+.neon-text {
+  color: $accent-blue;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.neon-border {
+  border-color: $accent-blue;
+  box-shadow: $shadow-glow-blue;
+}
+
+/* ── Page Transitions ── */
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.3s ease;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* ── Modal Transitions ── */
+.modal-enter-active,
+.modal-leave-active {
+  transition: all 0.3s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-from .modal-content,
+.modal-leave-to .modal-content {
+  transform: scale(0.95) translateY(10px);
+}
+
+/* ── Toast Transitions ── */
+.toast-enter-active {
+  animation: slideInRight 0.4s ease-out;
+}
+
+.toast-leave-active {
+  animation: slideInRight 0.3s ease-in reverse;
+}
+
+/* ── Utility ── */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mono {
+  font-family: $font-mono;
+}
+
+.text-accent {
+  color: $accent-blue;
+}
+
+.text-muted {
+  color: $text-secondary;
+}
+
+.text-danger {
+  color: $accent-red;
+}
+
+.text-success {
+  color: $accent-green;
+}
+
+/* ── Form Elements ── */
+input, select, textarea {
+  font-family: $font-family;
+  font-size: $font-base;
+  color: $text-primary;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  outline: none;
+  transition: all $transition-base;
+  width: 100%;
+
+  &::placeholder {
+    color: $text-muted;
+  }
+
+  &:focus {
+    border-color: $accent-blue;
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238B95A8' d='M6 8.825L.35 3.175l.7-.7L6 7.425l4.95-4.95.7.7z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+label {
+  display: block;
+  font-size: $font-sm;
+  font-weight: 500;
+  color: $text-secondary;
+  margin-bottom: $space-2;
+}
+
+/* ── Table ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  font-size: $font-sm;
+  font-weight: 600;
+  color: $text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-color;
+}
+
+td {
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  font-size: $font-sm;
+}
+
+tr {
+  transition: background $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.02);
+  }
+}
