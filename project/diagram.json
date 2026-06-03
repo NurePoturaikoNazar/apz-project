@@ -1,0 +1,56 @@
+﻿{
+  "version": 1,
+  "author": "Clean Fixed Version",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": 12.6,
+      "left": -116.1,
+      "rotate": 90,
+      "attrs": { "temperature": "22", "humidity": "50" }
+    },
+    {
+      "type": "wokwi-pir-motion-sensor",
+      "id": "pir1",
+      "top": 146.28,
+      "left": -245.1,
+      "rotate": 270,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr1",
+      "top": -137.5,
+      "left": -24.5,
+      "rotate": 270,
+      "attrs": { "lux": "500" }
+    },
+    {
+      "type": "wokwi-slide-potentiometer",
+      "id": "potSound",
+      "top": -292.6,
+      "left": -375.4,
+      "attrs": { "travelLength": "200" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:15", "dht1:SDA", "blue", [ "h0" ] ],
+    [ "esp:3V3", "dht1:VCC", "red", [ "h-158.21", "v28.8" ] ],
+    [ "esp:GND.1", "dht1:GND", "black", [ "h-158.21", "v-67.2" ] ],
+    [ "esp:13", "pir1:OUT", "orange", [ "h0" ] ],
+    [ "esp:5V", "pir1:VCC", "red", [ "h-119.81", "v0", "v-28.8" ] ],
+    [ "esp:GND.1", "pir1:GND", "black", [ "h-158.21", "v28.54" ] ],
+    [ "esp:34", "ldr1:AO", "purple", [ "h0" ] ],
+    [ "esp:3V3", "ldr1:VCC", "red", [ "h-4.61", "v-230.4", "h28.8" ] ],
+    [ "esp:GND.2", "ldr1:GND", "black", [ "h24.04", "v-230.4", "h-86" ] ],
+    [ "esp:35", "potSound:SIG", "green", [ "h0" ] ],
+    [ "esp:GND.2", "potSound:GND", "black", [ "h379.24", "v-326.4" ] ],
+    [ "esp:3V3", "potSound:VCC", "red", [ "h-398.21", "v-326.4" ] ]
+  ],
+  "dependencies": {}
+}

@@ -1,0 +1,26 @@
+{
+  "configurations": [
+    {
+      "name": "Win32",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/project/.vscode/arduino_stubs",
+        "${workspaceFolder}/project/src",
+        "${workspaceFolder}/project/**"
+      ],
+      "defines": [],
+      "compilerPath": "",
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "msvc-x64",
+      "browse": {
+        "path": [
+          "${workspaceFolder}/project/.vscode/arduino_stubs",
+          "${workspaceFolder}/project/src"
+        ],
+        "limitSymbolsToIncludedHeaders": true
+      }
+    }
+  ],
+  "version": 4
+}

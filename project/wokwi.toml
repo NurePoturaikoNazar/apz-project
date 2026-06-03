@@ -1,0 +1,8 @@
+[wokwi]
+version = 1
+elf = ".pio/build/esp32_wokwi_sim/firmware.elf"
+firmware = ".pio/build/esp32_wokwi_sim/firmware.bin"
+
+[[net.forward]]
+from = "10.13.37.1:3000"
+to = "localhost:3000"
