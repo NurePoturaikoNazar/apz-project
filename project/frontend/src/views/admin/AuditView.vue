@@ -84,8 +84,8 @@ import { useI18n } from 'vue-i18n'
 import { useUiStore } from '@/stores/ui'
 import { alertsApi } from '@/api/alerts'
 import Papa from 'papaparse'
-import jsPDF from 'jspdf'
-import 'jspdf-autotable'
+import { jsPDF } from 'jspdf'
+import autoTable from 'jspdf-autotable'
 
 import BaseCard from '@/components/ui/BaseCard.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
@@ -168,7 +168,7 @@ function exportPDF() {
     a.is_read ? 'Read' : 'Unread'
   ])
   
-  doc.autoTable({
+  autoTable(doc, {
     startY: 20,
     head: [['ID', 'Type', 'Message', 'Date', 'Status']],
     body: body,

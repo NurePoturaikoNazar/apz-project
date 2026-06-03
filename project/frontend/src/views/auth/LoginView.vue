@@ -23,15 +23,15 @@
         <div class="system-stats">
           <div class="stat-item">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/><path d="M2 12h20"/></svg>
-            <span>Real-time Telemetry</span>
+            <span>{{ t('auth.stats.telemetry') }}</span>
           </div>
           <div class="stat-item">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span>ACID Secured</span>
+            <span>{{ t('auth.stats.acid') }}</span>
           </div>
           <div class="stat-item">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 100 4 2 2 0 000-4z"/></svg>
-            <span>Deep Analytics</span>
+            <span>{{ t('auth.stats.analytics') }}</span>
           </div>
         </div>
       </div>
@@ -74,8 +74,8 @@
             <div class="demo-logins">
               <span class="demo-label">Demo access:</span>
               <div class="demo-buttons">
-                <button type="button" class="demo-btn" @click="setDemo('admin', 'admin')">Admin</button>
-                <button type="button" class="demo-btn" @click="setDemo('user@example.com', 'SecurePass123!')">User</button>
+                <button type="button" class="demo-btn" @click="setDemo('admin@admin.ua', 'admin')">Admin</button>
+                <button type="button" class="demo-btn" @click="setDemo('nazar@gmail.com', 'nazar123')">User</button>
               </div>
             </div>
 
@@ -96,8 +96,8 @@
         </BaseCard>
         
         <div class="lang-switch">
-          <button :class="{ active: uiStore.locale === 'ua' }" @click="uiStore.setLocale('ua')">UA</button>
-          <button :class="{ active: uiStore.locale === 'en' }" @click="uiStore.setLocale('en')">EN</button>
+          <button :class="{ active: uiStore.locale === 'ua' }" @click="switchLang('ua')">UA</button>
+          <button :class="{ active: uiStore.locale === 'en' }" @click="switchLang('en')">EN</button>
         </div>
       </div>
     </div>
@@ -119,7 +119,7 @@ import BaseCard from '@/components/ui/BaseCard.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 
 const router = useRouter()
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const authStore = useAuthStore()
 const uiStore = useUiStore()
 
@@ -130,6 +130,11 @@ const form = reactive({
   email: '',
   password: '',
 })
+
+function switchLang(lang) {
+  locale.value = lang
+  uiStore.setLocale(lang)
+}
 
 function setDemo(email, password) {
   form.email = email
@@ -143,13 +148,19 @@ async function handleLogin() {
   try {
     await authStore.login(form.email, form.password)
     uiStore.success(t('auth.success') || 'Login successful')
-    router.push('/')
+    
+    if (authStore.isAdmin) {
+      router.push('/admin/users')
+    } else {
+      router.push('/')
+    }
   } catch (err) {
-    if (err.status === 401) {
+    if (err.response && (err.response.status === 401 || err.response.status === 404)) {
       error.value = t('auth.invalidCredentials')
     } else {
       error.value = err.message || 'An error occurred during login'
     }
+    uiStore.error(error.value)
   } finally {
     loading.value = false
   }

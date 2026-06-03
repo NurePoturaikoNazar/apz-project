@@ -21,7 +21,8 @@ exports.getAll = async (req, res) => {
 };
 
 exports.getUnread = async (req, res) => {
-  const result = await Alert.getUnread();
+  const { userId } = req.query;
+  const result = await Alert.getUnread(userId);
   
   if (!result.success) {
     return res.status(500).json({ error: result.error });
@@ -30,7 +31,8 @@ exports.getUnread = async (req, res) => {
 };
 
 exports.getUnreadCount = async (req, res) => {
-  const result = await Alert.getUnreadCount();
+  const { userId } = req.query;
+  const result = await Alert.getUnreadCount(userId);
   
   if (!result.success) {
     return res.status(500).json({ error: result.error });

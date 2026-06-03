@@ -40,36 +40,43 @@ const hasData = computed(() => props.data && props.data.length > 0)
 const colorsMap = {
   temperature: '#FF6B9D', // Pink/Red
   humidity: '#00D4FF',    // Blue
-  lightLevel: '#FFA502',  // Yellow/Orange
-  soundLevel: '#A855F7'   // Purple
+  light_level: '#FFA502',  // Yellow/Orange
+  sound_level: '#A855F7'   // Purple
 }
 
 const namesMap = {
   temperature: t('telemetry.temperature'),
   humidity: t('telemetry.humidity'),
-  lightLevel: t('telemetry.light'),
-  soundLevel: t('telemetry.sound')
+  light_level: t('telemetry.light'),
+  sound_level: t('telemetry.sound')
 }
 
 const unitsMap = {
   temperature: t('telemetry.units.celsius'),
   humidity: t('telemetry.units.percent'),
-  lightLevel: t('telemetry.units.lux'),
-  soundLevel: t('telemetry.units.decibel')
+  light_level: t('telemetry.units.lux'),
+  sound_level: t('telemetry.units.decibel')
 }
 
 const series = computed(() => {
   if (!hasData.value) return []
   
   // Sort data by time ascending for the chart
-  const sortedData = [...props.data].sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+  const sortedData = [...props.data].sort((a, b) => {
+    const tA = a.recorded_at || a.created_at
+    const tB = b.recorded_at || b.created_at
+    return new Date(tA) - new Date(tB)
+  })
   
   return [{
     name: namesMap[props.type],
-    data: sortedData.map(item => ({
-      x: new Date(item.created_at).getTime(),
-      y: item[props.type]
-    }))
+    data: sortedData.map(item => {
+      const t = item.recorded_at || item.created_at
+      return {
+        x: new Date(t).getTime(),
+        y: item[props.type]
+      }
+    })
   }]
 })
 

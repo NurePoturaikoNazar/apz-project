@@ -15,7 +15,7 @@
     <div class="snapshot-info">
       <div class="info-row">
         <span class="reason-badge">
-          {{ snapshot.reason === 'motion_detected' ? t('alerts.types.MOTION_DETECTED') : snapshot.reason }}
+          {{ snapshot.trigger_reason === 'motion_detected' ? t('alerts.types.MOTION_DETECTED') : snapshot.trigger_reason }}
         </span>
         <span class="time">{{ formattedTime }}</span>
       </div>
@@ -30,6 +30,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useUiStore } from '@/stores/ui'
 import BaseButton from '../ui/BaseButton.vue'
 
 const props = defineProps({
@@ -43,9 +44,15 @@ const { t } = useI18n()
 const formattedTime = computed(() => {
   if (!props.snapshot.created_at) return ''
   const date = new Date(props.snapshot.created_at)
-  return new Intl.DateTimeFormat('default', {
+  
+  const uiStore = useUiStore()
+  const currentLocale = uiStore.locale === 'ua' ? 'uk-UA' : 'en-US'
+  const is12Hour = uiStore.locale === 'en'
+
+  return new Intl.DateTimeFormat(currentLocale, {
     hour: '2-digit', minute: '2-digit',
-    day: '2-digit', month: 'short', year: 'numeric'
+    day: '2-digit', month: 'short', year: 'numeric',
+    hour12: is12Hour
   }).format(date)
 })
 </script>

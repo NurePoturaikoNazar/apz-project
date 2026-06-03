@@ -55,8 +55,19 @@ class Alert {
   }
 
   // Отримати непрочитані
-  static async getUnread() {
+  static async getUnread(userId = null) {
     try {
+      if (userId) {
+        const result = await pool.query(
+          `SELECT a.* FROM alerts a
+           JOIN devices d ON a.device_id = d.id
+           JOIN rooms r ON d.room_id = r.id
+           WHERE r.user_id = $1 AND a.is_read = false
+           ORDER BY a.created_at DESC`,
+          [userId]
+        );
+        return { success: true, data: result.rows };
+      }
       const result = await pool.query('SELECT * FROM alerts WHERE is_read = false ORDER BY created_at DESC');
       return { success: true, data: result.rows };
     } catch (err) {
@@ -127,8 +138,18 @@ class Alert {
   }
 
   // Отримати кількість непрочитаних
-  static async getUnreadCount() {
+  static async getUnreadCount(userId = null) {
     try {
+      if (userId) {
+        const result = await pool.query(
+          `SELECT COUNT(a.*)::int AS count FROM alerts a
+           JOIN devices d ON a.device_id = d.id
+           JOIN rooms r ON d.room_id = r.id
+           WHERE r.user_id = $1 AND a.is_read = false`,
+          [userId]
+        );
+        return { success: true, data: { unread: result.rows[0].count } };
+      }
       const result = await pool.query('SELECT COUNT(*)::int AS count FROM alerts WHERE is_read = false');
       return { success: true, data: { unread: result.rows[0].count } };
     } catch (err) {

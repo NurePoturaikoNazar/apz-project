@@ -158,7 +158,8 @@ exports.getHistory = async (req, res) => {
 
 exports.getRoomTelemetry = async (req, res) => {
   const { roomId } = req.params;
-  const result = await Measurement.getLatestByRoom(roomId);
+  const { limit = 100 } = req.query;
+  const result = await Measurement.getHistoryByRoom(roomId, parseInt(limit, 10));
   
   if (!result.success) {
     return res.status(500).json({ error: result.error });

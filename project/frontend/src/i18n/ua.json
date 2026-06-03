@@ -25,7 +25,14 @@
     "passwordPlaceholder": "Введіть пароль",
     "loggingIn": "Вхід...",
     "invalidCredentials": "Невірний email або пароль",
-    "sessionExpired": "Термін дії сесії закінчився"
+    "invalidCredentials": "Невірний email або пароль",
+    "sessionExpired": "Термін дії сесії закінчився",
+    "success": "Успішний вхід",
+    "stats": {
+      "telemetry": "Телеметрія в реальному часі",
+      "acid": "ACID Транзакції",
+      "analytics": "Глибока Аналітика"
+    }
   },
   "dashboard": {
     "title": "Дашборд",
@@ -106,6 +113,8 @@
       "HUMIDITY_HIGH": "Висока вологість",
       "HUMIDITY_LOW": "Низька вологість",
       "SOUND_HIGH": "Високий рівень шуму",
+      "SOUND": "Критичний рівень шуму",
+      "LIGHT": "Низький рівень освітлення",
       "MOTION_DETECTED": "Виявлено рух",
       "MANUAL": "Ручна тривога"
     }

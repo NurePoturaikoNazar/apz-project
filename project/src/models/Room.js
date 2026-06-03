@@ -16,10 +16,15 @@ class Room {
     }
   }
 
-  // Отримати всі з пристроями
-  static async getAll() {
+  // Отримати всі з пристроями (з фільтрацією по юзеру)
+  static async getAll(userId = null) {
     try {
-      const roomsQuery = await pool.query('SELECT * FROM rooms');
+      let roomsQuery;
+      if (userId) {
+        roomsQuery = await pool.query('SELECT * FROM rooms WHERE user_id = $1', [userId]);
+      } else {
+        roomsQuery = await pool.query('SELECT * FROM rooms');
+      }
       const rooms = roomsQuery.rows;
 
       for (let room of rooms) {

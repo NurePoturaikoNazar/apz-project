@@ -24,6 +24,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useUiStore } from '@/stores/ui'
 
 const props = defineProps({
   alert: { type: Object, required: true },
@@ -34,9 +35,15 @@ const { t } = useI18n()
 const formattedTime = computed(() => {
   if (!props.alert.created_at) return ''
   const date = new Date(props.alert.created_at)
-  return new Intl.DateTimeFormat('default', {
+  
+  const uiStore = useUiStore()
+  const currentLocale = uiStore.locale === 'ua' ? 'uk-UA' : 'en-US'
+  const is12Hour = uiStore.locale === 'en'
+
+  return new Intl.DateTimeFormat(currentLocale, {
     hour: '2-digit', minute: '2-digit',
-    day: '2-digit', month: 'short'
+    day: '2-digit', month: 'short',
+    hour12: is12Hour
   }).format(date)
 })
 

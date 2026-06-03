@@ -7,7 +7,7 @@ export const useAuthStore = defineStore('auth', () => {
   const token = ref(localStorage.getItem('aquila_token') || null)
 
   const isAuthenticated = computed(() => !!token.value)
-  const isAdmin = computed(() => user.value?.email === 'admin')
+  const isAdmin = computed(() => user.value?.role === 'admin' || user.value?.email === 'admin@admin.ua' || user.value?.email === 'admin')
   const userName = computed(() => user.value?.full_name || 'User')
 
   async function login(email, password) {
@@ -15,14 +15,14 @@ export const useAuthStore = defineStore('auth', () => {
     token.value = data.token || 'demo-token'
     
     // Determine role from email
-    const role = email === 'admin' ? 'admin' : 'user'
+    const role = (email === 'admin' || email === 'admin@admin.ua') ? 'admin' : 'user'
     
     user.value = {
+      ...data.user,
       id: data.user?.id || data.id,
       email: data.user?.email || email,
       full_name: data.user?.full_name || email,
       role,
-      ...data.user,
     }
 
     localStorage.setItem('aquila_token', token.value)

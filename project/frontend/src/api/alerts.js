@@ -2,13 +2,22 @@ import api from './axios'
 
 export const alertsApi = {
   getAll() {
-    return api.get('/alerts')
+    const auth = JSON.parse(localStorage.getItem('aquila_user') || '{}');
+    const isAdmin = auth.role === 'admin' || auth.email === 'admin' || auth.email === 'admin@admin.ua';
+    const params = !isAdmin && auth.id ? { userId: auth.id } : {};
+    return api.get('/alerts', { params })
   },
   getUnread() {
-    return api.get('/alerts/unread')
+    const auth = JSON.parse(localStorage.getItem('aquila_user') || '{}');
+    const isAdmin = auth.role === 'admin' || auth.email === 'admin' || auth.email === 'admin@admin.ua';
+    const params = !isAdmin && auth.id ? { userId: auth.id } : {};
+    return api.get('/alerts/unread', { params })
   },
   getUnreadCount() {
-    return api.get('/alerts/unread/count')
+    const auth = JSON.parse(localStorage.getItem('aquila_user') || '{}');
+    const isAdmin = auth.role === 'admin' || auth.email === 'admin' || auth.email === 'admin@admin.ua';
+    const params = !isAdmin && auth.id ? { userId: auth.id } : {};
+    return api.get('/alerts/unread/count', { params })
   },
   getByDevice(deviceId) {
     return api.get(`/alerts/${deviceId}`)

@@ -27,6 +27,34 @@ class Snapshot {
     }
   }
 
+  // Отримати всі для користувача
+  static async getByUserId(userId, limit = 50) {
+    try {
+      const result = await pool.query(
+        `SELECT s.* FROM snapshots s
+         JOIN devices d ON s.device_id = d.id
+         JOIN rooms r ON d.room_id = r.id
+         WHERE r.user_id = $1
+         ORDER BY s.created_at DESC
+         LIMIT $2`,
+        [userId, limit]
+      );
+      return { success: true, data: result.rows };
+    } catch (err) {
+      return { success: false, error: err.message };
+    }
+  }
+
+  // Отримати всі (адмін)
+  static async getAll(limit = 100) {
+    try {
+      const result = await pool.query('SELECT * FROM snapshots ORDER BY created_at DESC LIMIT $1', [limit]);
+      return { success: true, data: result.rows };
+    } catch (err) {
+      return { success: false, error: err.message };
+    }
+  }
+
   // Видалити
   static async delete(id) {
     try {

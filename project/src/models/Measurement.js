@@ -45,6 +45,23 @@ class Measurement {
       return { success: false, error: err.message };
     }
   }
+
+  // Отримати історію вимірювань для кімнати
+  static async getHistoryByRoom(roomId, limit = 100) {
+    try {
+      const result = await pool.query(`
+        SELECT m.* 
+        FROM measurements m
+        JOIN devices d ON d.id = m.device_id
+        WHERE d.room_id = $1
+        ORDER BY m.recorded_at DESC
+        LIMIT $2
+      `, [roomId, limit]);
+      return { success: true, data: result.rows };
+    } catch (err) {
+      return { success: false, error: err.message };
+    }
+  }
 }
 
 module.exports = Measurement;

@@ -104,7 +104,7 @@
         <img :src="selectedSnapshot.image_url || selectedSnapshot.imageUrl" alt="Snapshot" />
         <div class="modal-image-info">
           <p><strong>{{ t('snapshots.timestamp') }}:</strong> {{ formatTime(selectedSnapshot.created_at) }}</p>
-          <p><strong>{{ t('snapshots.reason') }}:</strong> {{ selectedSnapshot.reason }}</p>
+          <p><strong>{{ t('snapshots.reason') }}:</strong> {{ selectedSnapshot.trigger_reason }}</p>
         </div>
       </div>
     </BaseModal>
@@ -116,6 +116,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useUiStore } from '@/stores/ui'
 import { alertsApi } from '@/api/alerts'
+import { snapshotsApi } from '@/api/snapshots'
 
 import AlertItem from '@/components/rooms/AlertItem.vue'
 import SnapshotCard from '@/components/rooms/SnapshotCard.vue'
@@ -159,8 +160,15 @@ async function fetchAlerts() {
 }
 
 async function fetchSnapshots() {
-  // Need device ID usually, for demo just set empty array or fake data
-  loadingSnapshots.value = false
+  loadingSnapshots.value = true
+  try {
+    const { data } = await snapshotsApi.getAll()
+    snapshots.value = data
+  } catch (error) {
+    uiStore.error('Failed to load snapshots')
+  } finally {
+    loadingSnapshots.value = false
+  }
 }
 
 async function markAlertRead(id) {
@@ -190,9 +198,14 @@ function viewSnapshot(snapshot) {
 
 function formatTime(dateStr) {
   if (!dateStr) return ''
-  return new Intl.DateTimeFormat('default', {
+  
+  const currentLocale = uiStore.locale === 'ua' ? 'uk-UA' : 'en-US'
+  const is12Hour = uiStore.locale === 'en'
+  
+  return new Intl.DateTimeFormat(currentLocale, {
     hour: '2-digit', minute: '2-digit', second: '2-digit',
-    day: '2-digit', month: 'short', year: 'numeric'
+    day: '2-digit', month: 'short', year: 'numeric',
+    hour12: is12Hour
   }).format(new Date(dateStr))
 }
 

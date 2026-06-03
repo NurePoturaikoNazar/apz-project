@@ -41,6 +41,22 @@ exports.getByDeviceId = async (req, res) => {
   res.json(result.data);
 };
 
+exports.getAll = async (req, res) => {
+  const { userId, limit = 50 } = req.query;
+  let result;
+  
+  if (userId) {
+    result = await Snapshot.getByUserId(userId, limit);
+  } else {
+    result = await Snapshot.getAll(limit);
+  }
+  
+  if (!result.success) {
+    return res.status(500).json({ error: result.error });
+  }
+  res.json(result.data);
+};
+
 exports.delete = async (req, res) => {
   const { id } = req.params;
   const result = await Snapshot.delete(id);

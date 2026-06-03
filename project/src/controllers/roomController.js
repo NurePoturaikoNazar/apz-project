@@ -12,7 +12,8 @@ exports.create = async (req, res) => {
 };
 
 exports.getAll = async (req, res) => {
-  const result = await Room.getAll();
+  const { userId } = req.query;
+  const result = await Room.getAll(userId);
   
   if (!result.success) {
     return res.status(500).json({ error: result.error });

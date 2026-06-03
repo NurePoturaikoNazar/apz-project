@@ -25,7 +25,13 @@
     "passwordPlaceholder": "Enter password",
     "loggingIn": "Signing in...",
     "invalidCredentials": "Invalid email or password",
-    "sessionExpired": "Session expired"
+    "sessionExpired": "Session expired",
+    "success": "Login successful",
+    "stats": {
+      "telemetry": "Real-time Telemetry",
+      "acid": "ACID Secured",
+      "analytics": "Deep Analytics"
+    }
   },
   "dashboard": {
     "title": "Dashboard",
@@ -106,6 +112,8 @@
       "HUMIDITY_HIGH": "High Humidity",
       "HUMIDITY_LOW": "Low Humidity",
       "SOUND_HIGH": "High Noise Level",
+      "SOUND": "Critical Noise Level",
+      "LIGHT": "Low Light Level",
       "MOTION_DETECTED": "Motion Detected",
       "MANUAL": "Manual Alert"
     }
